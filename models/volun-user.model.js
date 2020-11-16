@@ -11,11 +11,12 @@ const userSchema = new Schema(
         lowercase: true,
         trim: true,
       },
-        passwordHash: { type: String, required: [true, "Password is required."] },
+        password: { type: String, required: [true, "Password is required."] },
         profession: {type : String , required: true},
         description : String,
         image : {type: String, default: "https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png"},
-        skill : [String]
+        skill : String,
+        role : {type : String , default: "volunteer" }
 
     },
     {
