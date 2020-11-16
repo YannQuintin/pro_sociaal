@@ -9,22 +9,32 @@ const router = new Router();
 
 
 // Get route to render the create project hbs
-router.get("/createProjects", (req, res) => res.render("projects/createProjects"));
+router.get("/projects/create", (req, res) => res.render("projects/createProjects"));
 
 // Post route to add the form data to db
-router.post("/createProjects", (req, res) => {
-  const { name, publisher, description, skillRequired, moneySaved } = req.body;
+router.post("/projects/new", (req, res, next) => {
+  const { name, description, skillRequired, moneySaved } = req.body;
 
-  Project.create({ name, publisher, description, skillRequired, moneySaved })
-    .then((dbProject) =>
-      User.findByIdAndUpdate(publisher, { $push: { projects: dbProject._id } })
-    )
-    .then(() => res.redirect("/"))
-    .catch((err) =>
-      console.error(`Err while creating the project in the DB: ${err}`)
-    );
+  Movie.create({ name, description, skillRequired, moneySaved })
+    .then((newProjectSavedInDB) => {
+      console.log(newProjectSavedInDB);
+      res.redirect("/projects");
+    })
+    .catch((error) => next(error));
 });
 
+
+router.get("/projects/:id", (req, res) => {
+  const { id } = req.params;
+
+  Project.findById(id)
+    .populate("cast")
+    .then((foundMovie) => {
+      console.log(foundMovie);
+      res.render("movies/show", foundMovie);
+    })
+    .catch((error) => next(error));
+});
 
 /* 
 // Display all projects from the db:
