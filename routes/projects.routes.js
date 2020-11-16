@@ -6,13 +6,22 @@ const Project = require("../models/Project.models");
 const router = new Router();
 
 //const router = new Router();
-
+router.get("/projects", (req, res) => {
+  Project.find()
+    .then((projectsFromDB) => {
+      console.log(projectsFromDB);
+      res.render("projects-list", { projects: projectsFromDB });
+    })
+    .catch((err) =>
+      console.log(`Error while getting the projects from the DB: ${err}`)
+    );
+});
 
 // Get route to render the create project hbs
-router.get("/createProjects", (req, res) => res.render("projects/createProjects"));
+router.get("/projects/create", (req, res) => res.render("projects/create"));
 
 // Post route to add the form data to db
-router.post("/createProjects", (req, res) => {
+router.post("/projects/create", (req, res) => {
   const { name, publisher, description, skillRequired, moneySaved } = req.body;
 
   Project.create({ name, publisher, description, skillRequired, moneySaved })
