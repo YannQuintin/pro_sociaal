@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { Schema, model } = mongoose;
 const userSchema = new Schema(
     {
-      name : String,
+      name : {type: String, required: [true, "Name is required"]},
       email: {
         type: String,
         required: [true, "Email is required."],
@@ -16,13 +16,11 @@ const userSchema = new Schema(
         description : String,
         image : {type: String, default: "https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png"},
         skill : String,
-        role : {type : String , default: "volunteer" }
-
+        projects : [{ type: Schema.Types.ObjectId, ref: "Project" }],
     },
     {
         timestamps : true
     }
 );
 
-const User = mongoose.model("User",userSchema);
-module.exports = User;
+module.exports = model("User", userSchema);

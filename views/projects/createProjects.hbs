@@ -1,0 +1,33 @@
+<div id="signup">
+    <h2>Signup</h2>
+    <form action="/create-project" method="POST">
+
+        <label for="input-name">Name of the project</label>
+        <input type="text" id="input-name" name="name" placeholder="Your project name" />
+
+        <label for="publisher-select"> Created by </label>
+        <select name="publisher" id="publisher-select">
+        <option disable selected value=""></option>
+        {{#each dbUsers}}
+        <option value="{{this._id}}"> {{this.name}} </option>
+        {{/each}}
+        </select>
+        
+        <labe for="input-description">Description</labe>
+        <input type="text" name="description" id="input-description" placeholder="Tell us more about the project"/>
+
+        <labe for="input-skill">Skills</labe>
+        <input type="text" name="skill" id="input-skill" placeholder="what skill do you need"/>
+
+        <button type="submit">Create project</button>
+
+        {{!-- error message will be added here --}}
+        {{#if errorMessage}}
+        <p class="error">{{errorMessage}}</p>
+        {{/if}}
+
+        {{#if validationError}}
+        <p class="error">{{validationError}}</p>
+        {{/if}}
+    </form>
+</div>
