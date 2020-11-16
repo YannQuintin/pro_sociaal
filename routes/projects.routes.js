@@ -7,6 +7,39 @@ const router = new Router();
 
 //const router = new Router();
 
+
+// Get route to render the create project hbs
 router.get("/createProjects", (req, res) => res.render("projects/createProjects"));
+
+// Post route to add the form data to db
+router.post("/createProjects", (req, res) => {
+  const { name, publisher, description, skillRequired, moneySaved } = req.body;
+
+  Project.create({ name, publisher, description, skillRequired, moneySaved })
+    .then((dbProject) =>
+      User.findByIdAndUpdate(publisher, { $push: { projects: dbProject._id } })
+    )
+    .then(() => res.redirect("/"))
+    .catch((err) =>
+      console.error(`Err while creating the project in the DB: ${err}`)
+    );
+});
+
+
+/* 
+// Display all projects from the db:
+router.get("/", (req, res) => {
+  Post.find()
+    .populate("author") // --> we are saying: give me whole user object with this ID (author represents an ID in our case)
+    .then((dbPosts) => {
+      console.log(dbPosts);
+      res.render("posts/list", { posts: dbPosts });
+    })
+    .catch((err) =>
+      console.error(`Err while getting the posts from the DB: ${err}`)
+    );
+}); */
+
+
 
 module.exports = router;
