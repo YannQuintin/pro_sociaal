@@ -1,20 +1,20 @@
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const { Router } = require("express");
-const User = require("../models/volun-user.model");
+const User = require("../models/User.model");
 
 const router = new Router();
 const saltRounds = 10;
 
 // 2. GET route ==> to display the signup form to users.
-router.get("signup", (req, res) => res.render("auth/signup"));
+router.get("/signup", (req, res) => res.render("auth/signup"));
 
 // 3. POST route ==> to process form data (don't forget to hash the password with bcrypt ;{ )
 router.post("/signup", (req, res, next) => {
-  const { name, email, password, } = req.body;
+  const { name, email, password, profession, description , skill} = req.body;
 
   // Validate that incoming data is not empty.
-  if (!name || !email || !password) {
+  if (!name || !email || !password || !profession) {
     res.render("auth/signup", {
       name,
       email,
@@ -54,13 +54,13 @@ router.post("/signup", (req, res, next) => {
     .hash(password, saltRounds)
     // Create new user with the hashed password
     .then((hashedPassword) =>
-      User.create({ username, email, passwordHash: hashedPassword })
+      User.create({ name, email, password: hashedPassword, profession, description , skill  })
         .then((newUser) => {
           // add user to session.
           req.session.user = newUser;
 
           // redirect to user profile.
-          res.redirect("/user-profile");
+          res.redirect("/index");
         })
         .catch((error) => {
           if (error instanceof mongoose.Error.ValidationError) {
