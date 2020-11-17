@@ -1,1 +1,10 @@
 <h1> Projects </h1>
+
+<div class="container">
+    <h1>Projects</h1>
+    <div class="row">
+        {{#each projectsFromDB}}
+         {{>projectCard this }}
+        {{/each}}
+    </div>
+</div>
