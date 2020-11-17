@@ -23,9 +23,9 @@ router.get("/projects/create", (req, res) => res.render("projects/create"));
 // Post route to add the form data to db
 router.post("/projects/create", (req, res) => {
   const { name, description, skillRequired, moneySaved } = req.body;
-  //const publisher = [{req.session.user.name}];
+  const publisher = [req.session.user];
   
-  console.log(publisher)
+  //console.log(publisher)
   Project.create({ name, publisher, description, skillRequired, moneySaved })
     .then((dbProject) =>
       User.findByIdAndUpdate(publisher, { $push: { projects: dbProject._id } })

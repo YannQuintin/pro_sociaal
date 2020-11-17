@@ -14,14 +14,6 @@
         <labe for="input-moneySaved">Money Saved</labe>
         <input type="number" name="moneySaved" id="input-moneySaved" placeholder="How much money to save"/>
 
-        <label for="publisher-select"> Created by </label>
-        <select name="publisher" id="publisher-select">
-        <option disable selected value=""></option>
-        {{#each dbUsers}}
-        <option value="{{this._id}}"> {{this.name}} </option>
-        {{/each}}
-        </select>
-
         <button type="submit">Create project</button>
 
         {{!-- error message will be added here --}}
