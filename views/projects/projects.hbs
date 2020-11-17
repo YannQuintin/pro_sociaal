@@ -3,10 +3,9 @@
 <div class="container">
     <h1>Projects</h1>
     <div class="row">
-        {{#each projectsFromDB}}
-         {{>projectCard this }}
-        {{else}}
-            <p>There are no movies yet!</p>
+        {{#each projects}}
+         {{>projectcard this }}
         {{/each}}
     </div>
 </div>
+

@@ -3,15 +3,15 @@
         <img class="card-img-top" src="{{this.image_url}}" alt="{{this.name}}" />
         <div class="card-body">
             <h3 class="card-title">
-                {{this.name}}
+                Project:{{this.name}}
             </h3>
             <p class="card-text">
-                {{this.description}}
+                Descriptions: {{this.description}}
             </p>
             <h5>
                 <div class="row">
                     <div class="col-md-6">
-                    <p>Published by {{this.publisher}}</p>
+                    <p>Published by {{this.publisher.name}}</p>
                     </div>
                     <div>
                     <p>Required skills{{this.skillRequired}}</p>
