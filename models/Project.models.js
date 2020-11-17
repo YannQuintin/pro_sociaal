@@ -6,7 +6,8 @@ const ProjectSchema = new Schema(
       publisher : [{ type: Schema.Types.ObjectId, ref: "User" }],
       description : {type: String, required: true},
       skillRequired : {type: String, required: true},
-      moneySaved : {type: Number, required: true},        
+      moneySaved : {type: Number, required: true}, 
+      status: {type: String},       
     },
     {
         timestamps : true
