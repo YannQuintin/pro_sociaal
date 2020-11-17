@@ -10,7 +10,7 @@ router.get("/projects", (req, res) => {
   Project.find()
     .then((projectsFromDB) => {
       console.log(projectsFromDB);
-      res.render("projects-list", { projects: projectsFromDB });
+      res.render("projects/projects", { projects: projectsFromDB });
     })
     .catch((err) =>
       console.log(`Error while getting the projects from the DB: ${err}`)
@@ -27,6 +27,7 @@ router.post("/projects/create", (req, res) => {
   Project.create({ name, publisher, description, skillRequired, moneySaved })
     .then((dbProject) =>
       User.findByIdAndUpdate(publisher, { $push: { projects: dbProject._id } })
+      .populate("publisher")
     )
     .then(() => res.redirect("/"))
     .catch((err) =>
@@ -39,10 +40,9 @@ router.get("/projects/:id", (req, res) => {
   const { id } = req.params;
 
   Project.findById(id)
-    .populate("cast")
-    .then((foundMovie) => {
-      console.log(foundMovie);
-      res.render("movies/show", foundMovie);
+    .then((foundProject) => {
+      console.log(foundProject);
+      res.render("projects/show", foundProject);
     })
     .catch((error) => next(error));
 });
