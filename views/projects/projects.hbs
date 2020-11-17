@@ -5,6 +5,8 @@
     <div class="row">
         {{#each projectsFromDB}}
          {{>projectCard this }}
+        {{else}}
+            <p>There are no movies yet!</p>
         {{/each}}
     </div>
 </div>
