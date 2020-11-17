@@ -5,6 +5,15 @@
         <label for="input-name">Name of the project</label>
         <input type="text" id="input-name" name="name" placeholder="Your project name" />
 
+        <labe for="input-description">Description</labe>
+        <input type="text" name="description" id="input-description" placeholder="Tell us more about the project"/>
+
+        <labe for="input-skill">Skills Required</labe>
+        <input type="text" name="skillRequired" id="input-skill" placeholder="what skill do you need"/>
+
+        <labe for="input-moneySaved">Money Saved</labe>
+        <input type="number" name="moneySaved" id="input-moneySaved" placeholder="How much money to save"/>
+
         <label for="publisher-select"> Created by </label>
         <select name="publisher" id="publisher-select">
         <option disable selected value=""></option>
@@ -12,12 +21,6 @@
         <option value="{{this._id}}"> {{this.name}} </option>
         {{/each}}
         </select>
-        
-        <labe for="input-description">Description</labe>
-        <input type="text" name="description" id="input-description" placeholder="Tell us more about the project"/>
-
-        <labe for="input-skill">Skills</labe>
-        <input type="text" name="skill" id="input-skill" placeholder="what skill do you need"/>
 
         <button type="submit">Create project</button>
 
