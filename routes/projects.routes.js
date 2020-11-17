@@ -29,7 +29,7 @@ router.post("/projects/create", (req, res) => {
       User.findByIdAndUpdate(publisher, { $push: { projects: dbProject._id } })
       .populate("publisher")
     )
-    .then(() => res.redirect("/"))
+    .then(() => res.redirect("/user-profile"))
     .catch((err) =>
       console.error(`Err while creating the project in the DB: ${err}`)
     );
