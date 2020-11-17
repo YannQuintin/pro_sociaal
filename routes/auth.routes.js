@@ -60,21 +60,27 @@ router.post("/signup", (req, res, next) => {
           req.session.user = newUser;
 
           // redirect to user profile.
-          res.redirect("/index");
+          res.redirect("/user-profile");
         })
         .catch((error) => {
           if (error instanceof mongoose.Error.ValidationError) {
             res.status(500).render("auth/signup", {
+              name,
               email,
-              username,
+              profession,
+              description,
+              skill,
               validationError: error.message,
             });
           } else if (error.code === 11000) {
             res.status(500).render("auth/signup", {
+              name,
               email,
-              username,
+              profession,
+              description,
+              skill,
               errorMessage:
-                "Username and email need to be unique. Either username or email is already used.",
+                "Email is already used.",
             });
           } else {
             next(error);
@@ -86,7 +92,7 @@ router.post("/signup", (req, res, next) => {
 
 // 4. GET route ==> to render the profile page of the user.
 router.get("/user-profile", (req, res) => {
-  res.render("users/user-profile", { user: req.session.user });
+  res.render("user-profile", { user: req.session.user });
 });
 
 // 5. GET route ==> to render the login form to user
@@ -118,11 +124,7 @@ router.post("/login", (req, res, next) => {
           errorMessage: "Email is not registered. Try with other email.",
         });
         return;
-      } else if (bcrypt.compareSync(password, user.passwordHash)) {
-        //res.render("users/user-profile", { user });
-
-        // Adding user to session so we can have an eye.
-        // redirect to the route for the profile
+      } else if (bcrypt.compareSync(password, user.password)) {
         req.session.user = user;
         res.redirect("/user-profile");
       } else {
