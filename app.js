@@ -43,6 +43,7 @@ require("./configs/session")(app)
 app.locals.title = 'Pro Sociaal';
 
 
+hbs.registerPartials(__dirname + '/views/partials');
 
 const index = require('./routes/index');
 app.use('/', index);
