@@ -21,19 +21,12 @@ router.get("/projects", (req, res) => {
 // Get route to render the create project hbs
 router.get("/projects/create", (req, res) => res.render("projects/create"));
 
-// Post route to add the form data to db
+// Post route to add the project creation form to db
 router.post("/projects/create", (req, res) => {
   const { name, description, skillRequired, moneySaved } = req.body;
   const publisher = req.session.user;
   
-  //console.log(publisher)
   Project.create({ name, publisher: publisher._id, description, skillRequired, moneySaved })
-    .then((dbProject) =>{
-      //const publisher = req.session.user;
-      //Project.findOneAndUpdate({ _id: dbProject._id }, { publisher: publisher._id }, { new: true })
-      //User.findByIdAndUpdate(publisher, { $push: { projects: dbProject._id } })
-      //.populate("publisher")
-    })
     .then(() => res.redirect("/user-profile"))
     .catch((err) =>
       console.error(`Err while creating the project in the DB: ${err}`)
@@ -41,7 +34,7 @@ router.post("/projects/create", (req, res) => {
 });
 
 
-
+// Get route to render a specific project
 router.get("/projects/:id", (req, res) => {
   const { id } = req.params;
 
@@ -50,6 +43,43 @@ router.get("/projects/:id", (req, res) => {
       console.log(foundProject);
       res.render("projects/show", foundProject);
     })
+    .catch((error) => next(error));
+});
+
+
+//!! PROJECT UPDATE WIP
+// GET route to render a single project to be edited
+router.get("/projects/:id/edit", (req, res, next) => {
+  const { id } = req.params;
+
+  projects.findById(id)
+    .then((projectsFromDB) =>
+      res.render("projects/edit", projectsFromDB)
+    )
+    .catch((error) => next(error));
+});
+
+// POST route to submit a specific project edits
+router.post("/projects/:id/edit", (req, res, next) => {
+  const { id } = req.params;
+  const { name, email, password, profession, description, image, skill } = req.body;
+
+  Project.findByIdAndUpdate(
+    id,
+    { name, email, password, profession, description, image, skill },
+    { new: true }
+  )
+    .then((updatedProject) => res.redirect("/"))
+    .catch((error) => next(error));
+});
+
+//!! PROJECT DELETE WIP
+//POST route to delete a specific project
+router.post("/project/:id/delete", (req, res, next) => {
+  const { id } = req.params;
+
+  Project.findByIdAndDelete(id)
+    .then(() => res.redirect("/projects"))
     .catch((error) => next(error));
 });
 
