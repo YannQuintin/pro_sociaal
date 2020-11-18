@@ -23,8 +23,8 @@
   
   {{#if projects}}
   <ul>
-    {{#each user.projects}}
-    <li>{{this}}</li>
+    {{#each user.projects._id}}
+    <li>{{this.name}}</li>
     {{/each}}
   </ul>
     {{/if}} 
