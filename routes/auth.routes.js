@@ -6,6 +6,7 @@ const User = require("../models/User.model");
 const router = new Router();
 const saltRounds = 10;
 
+
 // 2. GET route ==> to display the signup form to users.
 router.get("/signup", (req, res) => res.render("auth/signup"));
 
@@ -92,8 +93,11 @@ router.post("/signup", (req, res, next) => {
 
 // 4. GET route ==> to render the profile page of the user.
 router.get("/user-profile", (req, res) => {
-  res.render("user-profile", { user: req.session.user });
+  res.render("user/profile", { user: req.session.user });
 });
+
+
+
 
 // 5. GET route ==> to render the login form to user
 router.get("/login", (req, res) => res.render("auth/login"));
