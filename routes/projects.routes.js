@@ -10,7 +10,7 @@ router.get("/projects", (req, res) => {
   Project.find()
     .populate("publisher")
     .then((projectsFromDB) => {
-      console.log(projectsFromDB);
+      //console.log(projectsFromDB);
       res.render("projects/projects", { projects: projectsFromDB });
     })
     .catch((err) =>
@@ -28,12 +28,7 @@ router.post("/projects/create", (req, res) => {
   
   //console.log(publisher)
   Project.create({ name, publisher: publisher._id, description, skillRequired, moneySaved })
-    .then((dbProject) =>{
-      //const publisher = req.session.user;
-      //Project.findOneAndUpdate({ _id: dbProject._id }, { publisher: publisher._id }, { new: true })
-      //User.findByIdAndUpdate(publisher, { $push: { projects: dbProject._id } })
-      //.populate("publisher")
-    })
+    
     .then(() => res.redirect("/user-profile"))
     .catch((err) =>
       console.error(`Err while creating the project in the DB: ${err}`)
