@@ -142,7 +142,7 @@ router.post("/login", (req, res, next) => {
 });
 
 
-//!! User UPDATE WIP
+//!! User UPDATE 
 // GET route to render a single user to be edited
 router.get("/user/:id/edit", (req, res, next) => {
 const { id } = req.params;
@@ -164,7 +164,7 @@ router.post("/user/:id", (req, res, next) => {
     { name, email, profession, description, skill },
     { new: true }
   )
-    .then((updatedUser) => res.redirect("/user-profile"))
+    .then((updatedUser) => res.render("user/profile", { user: updatedUser }))
     .catch((error) => next(error));
 });
 
