@@ -5,27 +5,23 @@
             <h3 class="card-title">
                 Project name:{{this.name}}
             </h3>
-            <p class="card-text">
-                Descriptions: {{this.description}}
-            </p>
             <h5>
                 <div class="row">
                     <div class="col-md-6">
-                    <p>Published by {{this.publisher.name}}</p>
+                    <p>Published by: {{this.publisher.name}}</p>
                     </div>
                     <div>
-                    <p>Required skills{{this.skillRequired}}</p>
+                    <p>Required skills:{{this.skillRequired}}</p>
                     </div>
                     <div>
-                    <p>Saving {{this.moneySaved}}</p>
-                    </div>
-                    <div>
-                    <p>Status {{this.status}}</p>
+                    <p>Money Saved: {{this.moneySaved}}</p>
                     </div>
                 </div>
             </h5>
         </div>
     </div>
+    <a href="/projects/{{this._id}}">See More Details</a>
+    
 </div>
 
 {{!-- 

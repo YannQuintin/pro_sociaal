@@ -2,8 +2,8 @@
 
 <form action="/projects/{{this._id}}" method="post">
   <input type="text" name="name" value={{this.name}}>
-  <input type="text" name="profession" value={{this.profession}}>
-  {{!-- <input type="text" name="skill" value={{this.skill}}> --}}
   <input type="text" name="description" value={{this.description}}>
+  <input type="text" name="skillRequired" value={{this.skillRequired}}>
+  <input type="text" name="moneySaved" value={{this.moneySaved}}>
   <button type="submit">Update information</button>
 </form>

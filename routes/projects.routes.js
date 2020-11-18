@@ -72,6 +72,7 @@ router.get("/projects/:id", (req, res) => {
   } = req.params;
 
   Project.findById(id)
+  .populate("publisher")
     .then((foundProject) => {
       console.log(foundProject);
       res.render("projects/show", foundProject);
@@ -83,11 +84,9 @@ router.get("/projects/:id", (req, res) => {
 //!! PROJECT UPDATE WIP
 // GET route to render a single project to be edited
 router.get("/projects/:id/edit", (req, res, next) => {
-  const {
-    id
-  } = req.params;
+  const {id} = req.params;
 
-  projects.findById(id)
+  Project.findById(id)
     .then((projectsFromDB) =>
       res.render("projects/edit", projectsFromDB)
     )
@@ -95,7 +94,7 @@ router.get("/projects/:id/edit", (req, res, next) => {
 });
 
 // POST route to submit a specific project edits
-router.post("/projects/:id/edit", (req, res, next) => {
+router.post("/projects/:id", (req, res, next) => {
   const {
     id
   } = req.params;
@@ -124,10 +123,9 @@ router.post("/projects/:id/edit", (req, res, next) => {
 
 //!! PROJECT DELETE WIP
 //POST route to delete a specific project
-router.post("/project/:id/delete", (req, res, next) => {
-  const {
-    id
-  } = req.params;
+
+router.post("/projects/:id/delete", (req, res, next) => {
+  const { id } = req.params;
 
   Project.findByIdAndDelete(id)
     .then(() => res.redirect("/projects"))
