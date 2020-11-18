@@ -5,9 +5,9 @@ body {
 a {
   color: #00B7FF; }
 
-.con {
-  justify-content: center;
-	align-items: center;
+.carousel-inner  img{
+  height: 20%;
 }
+
 
 /*# sourceMappingURL=style.css.map */

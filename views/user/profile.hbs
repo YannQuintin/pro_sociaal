@@ -7,7 +7,9 @@
     <p><b>Email:</b> {{user.email}}</p>
     <p><b>Profession:</b> {{user.profession}}</p>
     <p><b>Description:</b> {{user.description}}</p>
+
     <p><b>Skills:</b> {{user.skill}}</p>
+    
   {{!-- {{#if skill}}
   <ul>
     {{#each skill}}
@@ -18,11 +20,13 @@
   <p> You are yet to add a skill! <span><a href="/user-edit">Feel free to add
         them</a></span> </p>
   {{/if}} --}}
+  
   {{#if projects}}
   <ul>
-    {{#each projects}}
-    <li>{{this.projects}}</li>
+    {{#each user.projects}}
+    <li>{{this}}</li>
     {{/each}}
+  </ul>
     {{/if}} 
   </form>
   <hr>

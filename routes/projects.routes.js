@@ -12,7 +12,6 @@ router.get("/projects", (req, res) => {
   Project.find()
     .populate("publisher")
     .then((projectsFromDB) => {
-      //console.log(projectsFromDB);
       res.render("projects/projects", {
         projects: projectsFromDB
       });
@@ -64,13 +63,12 @@ router.post("/projects/create", (req, res) => {
     );
 });
 
-
 // Get route to render a specific project
 router.get("/projects/:id", (req, res) => {
   const {
     id
   } = req.params;
-
+  
   Project.findById(id)
   .populate("publisher")
     .then((foundProject) => {
