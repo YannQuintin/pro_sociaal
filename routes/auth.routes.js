@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const { Router } = require("express");
 const User = require("../models/User.model");
+const Project = require("../models/Project.models");
 
 const router = new Router();
 const saltRounds = 10;
@@ -95,6 +96,7 @@ router.post("/signup", (req, res, next) => {
 router.get("/user-profile", (req, res) => {
   User.findOne({_id:req.session.user._id})
     .populate("projects")
+    .populate("publisher")
     .then(userWithProjects => {
       res.render("user/profile", { user: userWithProjects });
     })
@@ -172,16 +174,6 @@ router.post("/user/:id", (req, res, next) => {
     .catch((error) => next(error));
 });
 
-
-//!! User DELETE WIP
-//POST route to delete a specific project
-router.post("/project/:id/delete", (req, res, next) => {
-  const { id } = req.params;
-
-  Project.findByIdAndDelete(id)
-    .then(() => res.redirect("/projects"))
-    .catch((error) => next(error));
-});
 
 // 7. POST
 router.post("/logout", (req, res) => {

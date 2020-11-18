@@ -1,0 +1,23 @@
+<div class="col-md-4">
+    <div class="card">
+        <img class="card-img-top" src="{{this.image_url}}" alt="{{this.name}}" />
+        <div class="card-body">
+            <h3 class="card-title">
+                Project name:{{this.name}}
+            </h3>
+            <h5>
+                <div class="row">
+                    <div class="col-md-6">
+                    <p>Required skills:{{this.skillRequired}}</p>
+                    </div>
+                  
+                    <div class="col-md-6">
+                    <p>Money Saved: {{this.moneySaved}}</p>
+                    </div>
+                </div>
+            </h5>
+        </div>
+    </div>
+    <a href="/projects/{{this._id}}">See More Details</a>
+    
+</div>
