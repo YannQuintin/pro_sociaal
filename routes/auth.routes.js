@@ -142,14 +142,14 @@ router.post("/login", (req, res, next) => {
 });
 
 
-//!! PROJECT UPDATE WIP
+//!! User UPDATE WIP
 // GET route to render a single user to be edited
-router.get("/user/{{user._id}}/edit", (req, res, next) => {
+router.get("/user/:id/edit", (req, res, next) => {
 const { id } = req.params;
 
   User.findById(id)
     .then((foundUserFromDB) =>
-      res.render("user/{{user._id}}/edit", foundUserFromDB)
+      res.render("user/edit", foundUserFromDB)
     )
     .catch((error) => next(error));
 });
