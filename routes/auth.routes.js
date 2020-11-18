@@ -149,7 +149,7 @@ router.post("/login", (req, res, next) => {
 //!! User UPDATE 
 // GET route to render a single user to be edited
 router.get("/user/:id/edit", (req, res, next) => {
-const { id } = req.params;
+const {id} = req.params;
 
   User.findById(id)
     .then((foundUserFromDB) =>

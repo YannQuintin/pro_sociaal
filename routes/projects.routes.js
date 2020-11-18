@@ -12,7 +12,6 @@ router.get("/projects", (req, res) => {
   Project.find()
     .populate("publisher")
     .then((projectsFromDB) => {
-      console.log(projectsFromDB);
       res.render("projects/projects", {
         projects: projectsFromDB
       });
@@ -42,20 +41,36 @@ router.post("/projects/create", (req, res) => {
       skillRequired,
       moneySaved
     })
-    .then(() => res.redirect("/user-profile"))
+    .then((project) => {
+      User.findOneAndUpdate({
+        _id: publisher._id
+      },
+      {
+        $push : {
+          projects : project._id
+        }
+      },
+      { new: true } 
+      )
+      .then((updatedUser) => {
+        console.log(updatedUser);
+        res.redirect("/user-profile")
+      
+      })
+    })
     .catch((err) =>
       console.error(`Err while creating the project in the DB: ${err}`)
     );
 });
-
 
 // Get route to render a specific project
 router.get("/projects/:id", (req, res) => {
   const {
     id
   } = req.params;
-
+  
   Project.findById(id)
+  .populate("publisher")
     .then((foundProject) => {
       console.log(foundProject);
       res.render("projects/show", foundProject);
@@ -67,13 +82,11 @@ router.get("/projects/:id", (req, res) => {
 //!! PROJECT UPDATE WIP
 // GET route to render a single project to be edited
 router.get("/projects/:id/edit", (req, res, next) => {
-  const {
-    id
-  } = req.params;
+  const {id} = req.params;
 
   Project.findById(id)
-    .then((foundProjectsFromDB) =>
-      res.render("projects/edit", foundProjectsFromDB)
+    .then((projectsFromDB) =>
+      res.render("projects/edit", projectsFromDB)
     )
     .catch((error) => next(error));
 });
@@ -102,26 +115,15 @@ router.post("/projects/:id", (req, res, next) => {
         new: true
       }
     )
-    .then((project) => {
-      res.redirect("/user-profile")
-      User.findOneByIdAndUpdate({
-        _id: publisher._id
-      },
-      {
-        $push : {
-          projects : project._id
-        }
-      })
-    })
+    .then((updatedProject) => res.redirect("/user-profile"))
     .catch((error) => next(error));
 });
 
 //!! PROJECT DELETE WIP
 //POST route to delete a specific project
-router.post("/project/:id/delete", (req, res, next) => {
-  const {
-    id
-  } = req.params;
+
+router.post("/projects/:id/delete", (req, res, next) => {
+  const { id } = req.params;
 
   Project.findByIdAndDelete(id)
     .then(() => res.redirect("/projects"))

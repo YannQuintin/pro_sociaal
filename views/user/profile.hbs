@@ -7,6 +7,9 @@
     <p><b>Email:</b> {{user.email}}</p>
     <p><b>Profession:</b> {{user.profession}}</p>
     <p><b>Description:</b> {{user.description}}</p>
+
+    <p><b>Skills:</b> {{user.skill}}</p>
+    
   {{!-- {{#if skill}}
   <ul>
     {{#each skill}}
@@ -17,7 +20,8 @@
   <p> You are yet to add a skill! <span><a href="/user-edit">Feel free to add
         them</a></span> </p>
   {{/if}} --}}
-  {{#if user.projects}}
+  
+  {{#if projects}}
   <ul>
     {{#each user.projects}}
     <li>{{this}}</li>
@@ -44,3 +48,7 @@
 {{else}}
     <p><a href="/login">Login</a> or <a href="/signup">Register a new account</a> to see your profile!</p>
 {{/if}}
+
+<form id="logout-form" action="/logout" method="POST">
+    <button>Logout</button>
+</form>

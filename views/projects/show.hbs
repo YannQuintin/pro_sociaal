@@ -1,0 +1,27 @@
+<section>
+  <h2>Project Details</h2>
+
+  <p><b>Title:</b> {{title}}</p>
+  <p><b>Publisher:</b> {{publisher.name}}</p>
+  <p><b>Money Saved:</b> {{moneySaved}}</p>
+  <p><b>Skill Required:</b></p>
+  {{#if skillRequired}}
+  <ul>
+    {{#each skillRequired}}
+    <li>{{this.name}}</li>
+    {{/each}}
+  </ul>
+  {{/if}}
+
+  <p><b>Description:</b> {{description}}</p>
+
+  <a href="/projects/{{_id}}/edit">Edit Project</a>
+
+  <form action="/projects/{{_id}}/delete" method="post">
+  <button type="submit">Delete Project</button>
+  </form>
+  
+  <hr>
+  <a href="/projects">See all Projects</a>
+  <a href="/">Home</a>
+</section>
