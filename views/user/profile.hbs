@@ -21,14 +21,14 @@
         them</a></span> </p>
   {{/if}} --}}
   
-  {{#if projects}}
+  <p><b>Projects:</b>
   <ul>
     {{#each user.projects}}
-    <li>{{this}}</li>
+    <li>{{>userProjectCard this}}</li>
     {{/each}}
   </ul>
-    {{/if}} 
-  </form>
+  </p>
+
   <hr>
 </section>
     <div>
