@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
-const { Router } = require("express");
+const {
+  Router
+} = require("express");
 const User = require("../models/User.model");
 const Project = require("../models/Project.models");
 
@@ -11,7 +13,9 @@ router.get("/projects", (req, res) => {
     .populate("publisher")
     .then((projectsFromDB) => {
       //console.log(projectsFromDB);
-      res.render("projects/projects", { projects: projectsFromDB });
+      res.render("projects/projects", {
+        projects: projectsFromDB
+      });
     })
     .catch((err) =>
       console.log(`Error while getting the projects from the DB: ${err}`)
@@ -23,12 +27,38 @@ router.get("/projects/create", (req, res) => res.render("projects/create"));
 
 // Post route to add the project creation form to db
 router.post("/projects/create", (req, res) => {
-  const { name, description, skillRequired, moneySaved } = req.body;
+  const {
+    name,
+    description,
+    skillRequired,
+    moneySaved
+  } = req.body;
   const publisher = req.session.user;
-  
-  Project.create({ name, publisher: publisher._id, description, skillRequired, moneySaved })
-    
-    .then(() => res.redirect("/user-profile"))
+
+  Project.create({
+      name,
+      publisher: publisher._id,
+      description,
+      skillRequired,
+      moneySaved
+    })
+    .then((project) => {
+      User.findOneAndUpdate({
+        _id: publisher._id
+      },
+      {
+        $push : {
+          projects : project._id
+        }
+      },
+      { new: true } 
+      )
+      .then((updatedUser) => {
+        console.log(updatedUser);
+        res.redirect("/user-profile")
+      
+      })
+    })
     .catch((err) =>
       console.error(`Err while creating the project in the DB: ${err}`)
     );
@@ -37,7 +67,9 @@ router.post("/projects/create", (req, res) => {
 
 // Get route to render a specific project
 router.get("/projects/:id", (req, res) => {
-  const { id } = req.params;
+  const {
+    id
+  } = req.params;
 
   Project.findById(id)
     .then((foundProject) => {
@@ -51,7 +83,9 @@ router.get("/projects/:id", (req, res) => {
 //!! PROJECT UPDATE WIP
 // GET route to render a single project to be edited
 router.get("/projects/:id/edit", (req, res, next) => {
-  const { id } = req.params;
+  const {
+    id
+  } = req.params;
 
   projects.findById(id)
     .then((projectsFromDB) =>
@@ -62,14 +96,28 @@ router.get("/projects/:id/edit", (req, res, next) => {
 
 // POST route to submit a specific project edits
 router.post("/projects/:id/edit", (req, res, next) => {
-  const { id } = req.params;
-  const { name, description, skillRequired, moneySaved, status } = req.body;
+  const {
+    id
+  } = req.params;
+  const {
+    name,
+    description,
+    skillRequired,
+    moneySaved,
+    status
+  } = req.body;
 
   Project.findByIdAndUpdate(
-    id,
-    { name, description, skillRequired, moneySaved, status },
-    { new: true }
-  )
+      id, {
+        name,
+        description,
+        skillRequired,
+        moneySaved,
+        status
+      }, {
+        new: true
+      }
+    )
     .then((updatedProject) => res.redirect("/user-profile"))
     .catch((error) => next(error));
 });
@@ -77,7 +125,9 @@ router.post("/projects/:id/edit", (req, res, next) => {
 //!! PROJECT DELETE WIP
 //POST route to delete a specific project
 router.post("/project/:id/delete", (req, res, next) => {
-  const { id } = req.params;
+  const {
+    id
+  } = req.params;
 
   Project.findByIdAndDelete(id)
     .then(() => res.redirect("/projects"))
@@ -113,7 +163,7 @@ module.exports = router;
   return db.Product.findOneAndUpdate({ _id: req.params.id }, { review: dbReview._id }, { new: true });
   }) */
 
-  /*db.Product.findOne({ _id: req.params.id })
+/*db.Product.findOne({ _id: req.params.id })
 // ..and populate all of the notes associated with it
 .populate("review")
 .then(function(dbProduct) { */
