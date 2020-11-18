@@ -1,0 +1,50 @@
+<div>User Profile</div>
+
+{{#if user}}
+    <h2>Welcome, {{ user.name }}!</h2>
+      <img src="{{image}}" alt="profile-picture"> // This isn't link to Cloudinary yet
+    <p><b>Name:</b> {{user.name}}</p>
+    <p><b>Email:</b> {{user.email}}</p>
+    <p><b>Profession:</b> {{user.profession}}</p>
+    <p><b>Description:</b> {{user.description}}</p>
+    <p><b>Skills:</b> {{user.skill}}</p>
+  {{!-- {{#if skill}}
+  <ul>
+    {{#each skill}}
+    <li>{{user.skill}}</li>
+    {{/each}}
+  </ul>
+  {{else}}
+  <p> You are yet to add a skill! <span><a href="/user-edit">Feel free to add
+        them</a></span> </p>
+  {{/if}} --}}
+  {{#if projects}}
+  <ul>
+    {{#each projects}}
+    <li>{{this.projects}}</li>
+    {{/each}}
+    {{/if}} 
+  </form>
+  <hr>
+</section>
+    <div>
+        <button>
+            <a href="/projects/create">Create a project</a>
+        </button>
+    </div>
+    <div>
+        <button>
+            <a href="/user/{{user._id}}/edit">Edit your information</a>
+        </button>
+    </div>
+
+
+//The below means we can leave the profile page accessible for unsubscribed / logged out users.
+
+{{else}}
+    <p><a href="/login">Login</a> or <a href="/signup">Register a new account</a> to see your profile!</p>
+{{/if}}
+
+<form id="logout-form" action="/logout" method="POST">
+    <button>Logout</button>
+</form>

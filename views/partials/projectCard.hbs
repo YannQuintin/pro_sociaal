@@ -1,0 +1,40 @@
+<div class="col-md-4">
+    <div class="card">
+        <img class="card-img-top" src="{{this.image_url}}" alt="{{this.name}}" />
+        <div class="card-body">
+            <h3 class="card-title">
+                Project name:{{this.name}}
+            </h3>
+            <h5>
+                <div class="row">
+                    <div class="col-md-6">
+                    <p>Published by: {{this.publisher.name}}</p>
+                    </div>
+                    <div>
+                    <p>Required skills:{{this.skillRequired}}</p>
+                    </div>
+                    <div>
+                    <p>Money Saved: {{this.moneySaved}}</p>
+                    </div>
+                </div>
+            </h5>
+        </div>
+    </div>
+    <a href="/projects/{{this._id}}">See More Details</a>
+    
+</div>
+
+{{!-- 
+Project Model snapshot from Trello
+1. Project Name.
+2. Project name: string, required
+3. Project requirements: array of strings, required
+4. Project description: text field, required
+5. Money saved: numbers / required.
+6. Non-profit: object relationship. 
+7. Status: Open/close.
+
+Update
+- edit the project
+- update status --}}
+

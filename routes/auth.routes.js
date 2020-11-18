@@ -6,6 +6,7 @@ const User = require("../models/User.model");
 const router = new Router();
 const saltRounds = 10;
 
+
 // 2. GET route ==> to display the signup form to users.
 router.get("/signup", (req, res) => res.render("auth/signup"));
 
@@ -92,8 +93,11 @@ router.post("/signup", (req, res, next) => {
 
 // 4. GET route ==> to render the profile page of the user.
 router.get("/user-profile", (req, res) => {
-  res.render("user-profile", { user: req.session.user });
+  res.render("user/profile", { user: req.session.user });
 });
+
+
+
 
 // 5. GET route ==> to render the login form to user
 router.get("/login", (req, res) => res.render("auth/login"));
@@ -134,6 +138,44 @@ router.post("/login", (req, res, next) => {
         });
       }
     })
+    .catch((error) => next(error));
+});
+
+
+//!! User UPDATE 
+// GET route to render a single user to be edited
+router.get("/user/:id/edit", (req, res, next) => {
+const {id} = req.params;
+
+  User.findById(id)
+    .then((foundUserFromDB) =>
+      res.render("user/edit", foundUserFromDB)
+    )
+    .catch((error) => next(error));
+});
+
+// POST route to submit a specific project edits
+router.post("/user/:id", (req, res, next) => {
+  const { id } = req.params;
+  const { name, email, profession, description, skill } = req.body;
+
+  User.findByIdAndUpdate(
+    id,
+    { name, email, profession, description, skill },
+    { new: true }
+  )
+    .then((updatedUser) => res.render("user/profile", { user: updatedUser }))
+    .catch((error) => next(error));
+});
+
+
+//!! PROJECT DELETE WIP
+//POST route to delete a specific project
+router.post("/project/:id/delete", (req, res, next) => {
+  const { id } = req.params;
+
+  Project.findByIdAndDelete(id)
+    .then(() => res.redirect("/projects"))
     .catch((error) => next(error));
 });
 

@@ -1,18 +1,24 @@
 <div id="create-project">
     <h2>Create Project</h2>
-    <form action="/projects/create" enctype="multipart/form-data" method="POST">
+    <form action="/projects/create" method="POST">
 
         <label for="input-name">Name of the project</label>
         <input type="text" id="input-name" name="name" placeholder="Your project name" />
 
-        <labe for="input-description">Description</labe>
+        <label for="input-description">Description</label>
         <input type="text" name="description" id="input-description" placeholder="Tell us more about the project"/>
 
-        <labe for="input-skill">Skills Required</labe>
+        <label for="input-skill">Skills Required</label>
         <input type="text" name="skillRequired" id="input-skill" placeholder="what skill do you need"/>
 
-        <labe for="input-moneySaved">Money Saved</labe>
+        <label for="input-moneySaved">Money Saved</label>
         <input type="number" name="moneySaved" id="input-moneySaved" placeholder="How much money to save"/>
+
+{{!-- This is needed for the image
+        <div class="form-group">
+            <label for="image-input">Image:</label>
+            <input type="file" name="image" id="image-input" class="form-control-file" />
+        </div> --}}
 
         <button type="submit">Create project</button>
 
