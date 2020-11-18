@@ -93,7 +93,11 @@ router.post("/signup", (req, res, next) => {
 
 // 4. GET route ==> to render the profile page of the user.
 router.get("/user-profile", (req, res) => {
-  res.render("user/profile", { user: req.session.user });
+  User.findOne({_id:req.session.user._id})
+    .populate("projects")
+    .then(userWithProjects => {
+      res.render("user/profile", { user: userWithProjects });
+    })
 });
 
 
@@ -169,7 +173,7 @@ router.post("/user/:id", (req, res, next) => {
 });
 
 
-//!! PROJECT DELETE WIP
+//!! User DELETE WIP
 //POST route to delete a specific project
 router.post("/project/:id/delete", (req, res, next) => {
   const { id } = req.params;

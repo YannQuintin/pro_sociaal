@@ -16,7 +16,7 @@ const userSchema = new Schema(
         description : String,
         image : {type: String, default: "https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png"},
         skill : String,
-        projects : [{ type: Schema.Types.ObjectId, ref: "Project" }],
+        projects : { type: Schema.Types.ObjectId, ref: "Project" },
     },
     {
         timestamps : true
