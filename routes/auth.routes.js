@@ -141,6 +141,44 @@ router.post("/login", (req, res, next) => {
     .catch((error) => next(error));
 });
 
+
+//!! PROJECT UPDATE WIP
+// GET route to render a single user to be edited
+router.get("/user/{{user._id}}/edit", (req, res, next) => {
+const { id } = req.params;
+
+  User.findById(id)
+    .then((foundUserFromDB) =>
+      res.render("user/{{user._id}}/edit", foundUserFromDB)
+    )
+    .catch((error) => next(error));
+});
+
+// POST route to submit a specific project edits
+router.post("/user/:id", (req, res, next) => {
+  const { id } = req.params;
+  const { name, email, profession, description, skill } = req.body;
+
+  User.findByIdAndUpdate(
+    id,
+    { name, email, profession, description, skill },
+    { new: true }
+  )
+    .then((updatedUser) => res.redirect("/user-profile"))
+    .catch((error) => next(error));
+});
+
+
+//!! PROJECT DELETE WIP
+//POST route to delete a specific project
+router.post("/project/:id/delete", (req, res, next) => {
+  const { id } = req.params;
+
+  Project.findByIdAndDelete(id)
+    .then(() => res.redirect("/projects"))
+    .catch((error) => next(error));
+});
+
 // 7. POST
 router.post("/logout", (req, res) => {
   // Alternative 1 for logging out

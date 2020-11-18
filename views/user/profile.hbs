@@ -3,14 +3,14 @@
 {{#if user}}
     <h2>Welcome, {{ user.name }}!</h2>
       <img src="{{image}}" alt="profile-picture"> // This isn't link to Cloudinary yet
-    <p><b>Name:</b> {{this.name}}</p>
-    <p><b>Email:</b> {{this.email}}</p>
-    <p><b>Password:</b> {{this.password}}</p>
-    <p><b>Description:</b> {{this.description}}</p>
+    <p><b>Name:</b> {{user.name}}</p>
+    <p><b>Email:</b> {{user.email}}</p>
+    <p><b>Profession:</b> {{user.profession}}</p>
+    <p><b>Description:</b> {{user.description}}</p>
   {{#if skill}}
   <ul>
     {{#each skill}}
-    <li>{{this.skill}}</li>
+    <li>{{user.skill}}</li>
     {{/each}}
   </ul>
   {{else}}
@@ -33,7 +33,7 @@
     </div>
     <div>
         <button>
-            <a href="/edit">Edit your information</a>
+            <a href="/user/{{user._id}}/edit">Edit your information</a>
         </button>
     </div>
 

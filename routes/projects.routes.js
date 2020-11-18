@@ -62,14 +62,14 @@ router.get("/projects/:id/edit", (req, res, next) => {
 // POST route to submit a specific project edits
 router.post("/projects/:id/edit", (req, res, next) => {
   const { id } = req.params;
-  const { name, email, password, profession, description, image, skill } = req.body;
+  const { name, description, skillRequired, moneySaved, status } = req.body;
 
   Project.findByIdAndUpdate(
     id,
-    { name, email, password, profession, description, image, skill },
+    { name, description, skillRequired, moneySaved, status },
     { new: true }
   )
-    .then((updatedProject) => res.redirect("/"))
+    .then((updatedProject) => res.redirect("/user-profile"))
     .catch((error) => next(error));
 });
 
