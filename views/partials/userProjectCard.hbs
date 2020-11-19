@@ -19,5 +19,9 @@
         </div>
     </div>
     <a href="/projects/{{this._id}}">See More Details</a>
+    <a href="/projects/{{_id}}/edit">Edit Project</a>
+    <form action="/projects/{{_id}}/delete" method="post">
+        <button type="submit">Delete Project</button>
+    </form>
     
 </div>
