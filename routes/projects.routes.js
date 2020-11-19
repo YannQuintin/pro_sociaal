@@ -126,7 +126,7 @@ router.post("/projects/:id/delete", (req, res, next) => {
   const { id } = req.params;
 
   Project.findByIdAndDelete(id)
-    .then(() => res.redirect("/projects"))
+    .then(() => res.redirect("/user-profile"))
     .catch((error) => next(error));
 });
 
