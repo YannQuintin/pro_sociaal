@@ -13,7 +13,7 @@ router.get("/signup", (req, res) => res.render("auth/signup"));
 
 // 3. POST route ==> to process form data (don't forget to hash the password with bcrypt ;{ )
 router.post("/signup", (req, res, next) => {
-  const { name, email, password, profession, description , skill} = req.body;
+  const { name, email, password, profession, description , skill, image} = req.body;
 
   // Validate that incoming data is not empty.
   if (!name || !email || !password || !profession) {
@@ -30,8 +30,7 @@ router.post("/signup", (req, res, next) => {
 
   if (!emailFormatRegex.test(email)) {
     res.status(500).render("auth/signup", {
-      email,
-      username,
+      email, name, profession, description, skill,
       validationError: "Please use a valid email address.",
     });
     return;
@@ -56,7 +55,7 @@ router.post("/signup", (req, res, next) => {
     .hash(password, saltRounds)
     // Create new user with the hashed password
     .then((hashedPassword) =>
-      User.create({ name, email, password: hashedPassword, profession, description , skill  })
+      User.create({ name, email, password: hashedPassword, profession, description , skill , image  })
         .then((newUser) => {
           // add user to session.
           req.session.user = newUser;
@@ -170,7 +169,7 @@ router.post("/user/:id", (req, res, next) => {
     { name, email, profession, description, skill },
     { new: true }
   )
-    .then((updatedUser) => res.render("user/profile", { user: updatedUser }))
+    .then(res.redirect("/user-profile"))
     .catch((error) => next(error));
 });
 

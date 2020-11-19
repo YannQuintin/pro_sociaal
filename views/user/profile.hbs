@@ -14,11 +14,12 @@
         </div>
     <div class="container">
       <div class="row">
-        <div class="card-deck mx-auto w-50">
+        <div class="card-deck mx-auto w-30">
           <div class="card">
             <img src="{{user.image}}" class="card-img-top" alt="profile-picture">
             <div class="card-body">
               <h5 class="card-title">your information</h5>
+              <p><b>Name:</b>{{user.name}}</p>
               <p><b>Email:</b> {{user.email}}</p>
               <p><b>Profession:</b> {{user.profession}}</p>
               <p><b>Description:</b> {{user.description}}</p>
@@ -35,33 +36,13 @@
         </div>
       </div>
     </div>
-  {{!-- {{#if skill}}
-  <ul>
-    {{#each skill}}
-    <li>{{user.skill}}</li>
-    {{/each}}
-  </ul>
-  {{else}}
-  <p> You are yet to add a skill! <span><a href="/user-edit">Feel free to add
-        them</a></span> </p>
-  {{/if}} --}}
   
-  {{!-- <p><b>Projects:</b>
-  <ul>
+<div class="flex">
     {{#each user.projects}}
-    <li>{{>userProjectCard this}}</li>
-    {{/each}}
-  </ul>
-  </p> --}}
-
-<div class=" flex row row-cols-1 row-cols-md-2">
-      {{#each user.projects}}
-    <li>{{>userProjectCard this}}</li>
+      {{>userProjectCard this}}
     {{/each}}
 </div>
 
-
-  <hr>
 </section>
     <div>
         <button>
