@@ -79,7 +79,6 @@ router.get("/projects/:id", (req, res) => {
 });
 
 
-//!! PROJECT UPDATE WIP
 // GET route to render a single project to be edited
 router.get("/projects/:id/edit", (req, res, next) => {
   const {id} = req.params;
@@ -163,3 +162,4 @@ module.exports = router;
 // ..and populate all of the notes associated with it
 .populate("review")
 .then(function(dbProduct) { */
+
