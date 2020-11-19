@@ -1,4 +1,4 @@
-<div class="col-md-4">
+{{!-- <div class="col-md-4">
     <div class="card">
         <img class="card-img-top" src="{{this.image_url}}" alt="{{this.name}}" />
         <div class="card-body">
@@ -21,20 +21,23 @@
         </div>
     </div>
     <a href="/projects/{{this._id}}">See More Details</a>
-    
+    --}}
+</div class="row d-flex-center">
+  <div class="col mb-8">
+        <div class="card">
+        <img src="{{this.image}}" class="card-img-top" alt="project-image">
+        <div class="card-body">
+            <h5 class="card-title">Project name:{{this.name}}</h5>
+            <p class="card-text">{{this.description}}</p>
+            <hr>
+            <p>Money Saved: {{this.moneySaved}}</p>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="/projects/{{this._id}}">See More Details</a>
+        </div> 
 </div>
 
-<div class="container row row-cols-1 row-cols-md-2">
-  <div class="col mb-4">
-    <div class="card">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Project name:{{this.name}}</h5>
-        <p class="card-text">{{this.description}}</p>
-      </div>
-    </div>
-  </div>
-</div>
 {{!-- 
 Project Model snapshot from Trello
 1. Project Name.

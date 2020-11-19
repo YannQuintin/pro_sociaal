@@ -2,6 +2,16 @@
     <h2>Signup</h2>
     <form action="/signup" method="POST">
 
+        <label class="input-group mb-3" name="image">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile02">
+                <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
+            </div>
+            <div class="input-group-append">
+                <span class="input-group-text" id="inputGroupFileAddon02">Upload</span>
+            </div>
+        </label>
+
         <label for="input-name">Full name</label>
         <input type="text" id="input-name" name="name" placeholder="Your full name" />
 
