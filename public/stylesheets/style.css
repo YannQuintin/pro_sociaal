@@ -1,5 +1,4 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 a {
@@ -9,5 +8,16 @@ a {
   height: 20%;
 }
 
+.carousel-height {
+  height: 400px ;
+}
 
+.flex {
+  display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+}
 /*# sourceMappingURL=style.css.map */

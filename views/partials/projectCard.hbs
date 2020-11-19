@@ -22,21 +22,36 @@
     </div>
     <a href="/projects/{{this._id}}">See More Details</a>
     --}}
-</div class="row d-flex-center">
-  <div class="col mb-8">
-        <div class="card">
-        <img src="{{this.image}}" class="card-img-top" alt="project-image">
-        <div class="card-body">
-            <h5 class="card-title">Project name:{{this.name}}</h5>
-            <p class="card-text">{{this.description}}</p>
-            <hr>
-            <p>Money Saved: {{this.moneySaved}}</p>
+    {{!-- <div class="card">
+             <img src="{{this.image}}" class="card-img-top" alt="project-image">
+            <div class="card-body">
+                <h5 class="card-title">Project name:{{this.name}}</h5>
+                <p class="card-text">{{this.description}}</p>
+                <hr>
+                <p>Money Saved: {{this.moneySaved}}</p>
+                </div>
             </div>
-        </div>
-        <div class="card-footer">
+            <div class="card-footer">
             <a href="/projects/{{this._id}}">See More Details</a>
+            </div>
         </div> 
 </div>
+ --}}
+
+  <div class="card">
+    {{!-- <img src="..." class="card-img-top" alt="..."> --}}
+    <div class="card-body">
+      <h5 class="card-title">Project name:{{this.name}}</h5>
+      <p class="card-text">{{this.description}}</p>
+      <hr>
+        <p>Money Saved: {{this.moneySaved}}</p>
+    </div>
+    <div class="card-footer">
+    <a href="/projects/{{this._id}}">See More Details</a>
+    </div>
+  </div>
+
+
 
 {{!-- 
 Project Model snapshot from Trello
