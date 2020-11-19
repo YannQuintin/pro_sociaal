@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const { Router } = require("express");
 const User = require("../models/User.model");
 const Project = require("../models/Project.models");
+const fileUploader = require('../configs/cloudinary.config');
 
 const router = new Router();
 const saltRounds = 10;
@@ -12,8 +13,8 @@ const saltRounds = 10;
 router.get("/signup", (req, res) => res.render("auth/signup"));
 
 // 3. POST route ==> to process form data (don't forget to hash the password with bcrypt ;{ )
-router.post("/signup", (req, res, next) => {
-  const { name, email, password, profession, description , skill, image} = req.body;
+router.post("/signup", fileUploader.single('image'), (req, res, next) => {
+  const { name, email, password, profession, description , skill} = req.body;
 
   // Validate that incoming data is not empty.
   if (!name || !email || !password || !profession) {
@@ -55,7 +56,7 @@ router.post("/signup", (req, res, next) => {
     .hash(password, saltRounds)
     // Create new user with the hashed password
     .then((hashedPassword) =>
-      User.create({ name, email, password: hashedPassword, profession, description , skill , image  })
+      User.create({ name, email, password: hashedPassword, profession, description , skill , imageUrl: req.file.path  })
         .then((newUser) => {
           // add user to session.
           req.session.user = newUser;
