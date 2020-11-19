@@ -50,4 +50,11 @@ a {
   margin-top: 100px;
 }
 
+.carousel img {
+  height: 10%;
+}
+
+.img-fluid {
+  height: 230px;
+}
 /*# sourceMappingURL=style.css.map */
