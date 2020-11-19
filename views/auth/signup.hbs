@@ -1,10 +1,11 @@
 <div id="signup">
     <h2>Signup</h2>
-    <form action="/signup"  enctype="multipart/form-data" method="POST">
+    <form action="/signup" method="POST" enctype="multipart/form-data">
 
-
-        <label for="image-input">Image:</label>
-        <input type="file" name="image" id="" class="form-control-file" />
+        <div class="custom-file">
+            <label for="image-input">Image:</label>
+            <input type="file" name="image" id="image-input" class="form-control-file" />
+        </div>
 
         <label for="input-name">Full name</label>
         <input type="text" id="input-name" name="name" placeholder="Your full name" />

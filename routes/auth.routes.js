@@ -4,7 +4,7 @@ const {
   Router
 } = require("express");
 const User = require("../models/User.model");
-// const Project = require("../models/Project.models");
+const Project = require("../models/Project.models");
 const fileUploader = require('../configs/cloudinary.config');
 
 const router = new Router();
@@ -16,16 +16,8 @@ router.get("/signup", (req, res) => res.render("auth/signup"));
 
 // 3. POST route ==> to process form data (don't forget to hash the password with bcrypt ;{ )
 router.post("/signup", fileUploader.single('image'), (req, res, next) => {
-  console.log("callback called");
-  const {
-    name,
-    email,
-    password,
-    profession,
-    description,
-    skill,
-    imageUrl
-  } = req.body;
+  const { name, email, password, profession, description , skill} = req.body;
+
   // Validate that incoming data is not empty.
   if (!name || !email || !password || !profession) {
     res.render("auth/signup", {
@@ -68,17 +60,8 @@ router.post("/signup", fileUploader.single('image'), (req, res, next) => {
   bcrypt
     .hash(password, saltRounds)
     // Create new user with the hashed password
-    .then((hashedPassword) => {
-      User.create({
-          imageUrl: req.file.path,
-          name,
-          email,
-          password: hashedPassword,
-          profession,
-          description,
-          skill
-        })
-
+    .then((hashedPassword) =>
+      User.create({ name, email, password: hashedPassword, profession, description , skill , imageUrl: req.file.path  })
         .then((newUser) => {
           // add user to session.
           req.session.user = newUser;
