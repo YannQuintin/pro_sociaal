@@ -14,7 +14,7 @@ const userSchema = new Schema(
         password: { type: String, required: [true, "Password is required."] },
         profession: {type : String , required: true},
         description : String,
-        image : {type: String, default: "https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png"},
+        imageUrl : {type: String, default: "https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png"},
         skill : String,
         projects : [{ type: Schema.Types.ObjectId, ref: "Project" }],
     },

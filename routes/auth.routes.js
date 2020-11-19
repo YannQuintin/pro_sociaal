@@ -1,8 +1,11 @@
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
-const { Router } = require("express");
+const {
+  Router
+} = require("express");
 const User = require("../models/User.model");
-const Project = require("../models/Project.models");
+// const Project = require("../models/Project.models");
+const fileUploader = require('../configs/cloudinary.config');
 
 const router = new Router();
 const saltRounds = 10;
@@ -12,16 +15,23 @@ const saltRounds = 10;
 router.get("/signup", (req, res) => res.render("auth/signup"));
 
 // 3. POST route ==> to process form data (don't forget to hash the password with bcrypt ;{ )
-router.post("/signup", (req, res, next) => {
-  const { name, email, password, profession, description , skill, image} = req.body;
-
+router.post("/signup", fileUploader.single('image'), (req, res, next) => {
+  console.log("callback called");
+  const {
+    name,
+    email,
+    password,
+    profession,
+    description,
+    skill,
+    imageUrl
+  } = req.body;
   // Validate that incoming data is not empty.
   if (!name || !email || !password || !profession) {
     res.render("auth/signup", {
       name,
       email,
-      errorMessage:
-        "All fields are mandatory. Please provide your username, email and password.",
+      errorMessage: "All fields are mandatory. Please provide your username, email and password.",
     });
     return;
   }
@@ -30,7 +40,11 @@ router.post("/signup", (req, res, next) => {
 
   if (!emailFormatRegex.test(email)) {
     res.status(500).render("auth/signup", {
-      email, name, profession, description, skill,
+      email,
+      name,
+      profession,
+      description,
+      skill,
       validationError: "Please use a valid email address.",
     });
     return;
@@ -54,18 +68,28 @@ router.post("/signup", (req, res, next) => {
   bcrypt
     .hash(password, saltRounds)
     // Create new user with the hashed password
-    .then((hashedPassword) =>
-      User.create({ name, email, password: hashedPassword, profession, description , skill , image  })
+    .then((hashedPassword) => {
+      User.create({
+          imageUrl: req.file.path,
+          name,
+          email,
+          password: hashedPassword,
+          profession,
+          description,
+          skill
+        })
+
         .then((newUser) => {
           // add user to session.
           req.session.user = newUser;
-
           // redirect to user profile.
           res.redirect("/user-profile");
         })
+
         .catch((error) => {
           if (error instanceof mongoose.Error.ValidationError) {
             res.status(500).render("auth/signup", {
+              imageUrl,
               name,
               email,
               profession,
@@ -75,29 +99,33 @@ router.post("/signup", (req, res, next) => {
             });
           } else if (error.code === 11000) {
             res.status(500).render("auth/signup", {
+              imageUrl,
               name,
               email,
               profession,
               description,
               skill,
-              errorMessage:
-                "Email is already used.",
+              errorMessage: "Email is already used.",
             });
           } else {
             next(error);
           }
         })
-    )
+    })
     .catch((err) => next(err));
 });
 
 // 4. GET route ==> to render the profile page of the user.
 router.get("/user-profile", (req, res) => {
-  User.findOne({_id:req.session.user._id})
+  User.findOne({
+      _id: req.session.user._id
+    })
     .populate("projects")
     .populate("publisher")
     .then(userWithProjects => {
-      res.render("user/profile", { user: userWithProjects });
+      res.render("user/profile", {
+        user: userWithProjects
+      });
     })
 });
 
@@ -111,20 +139,24 @@ router.get("/login", (req, res) => res.render("auth/login"));
 router.post("/login", (req, res, next) => {
   console.log("SESSION =====> ", req.session);
   // get the data from login form
-  const { email, password } = req.body;
+  const {
+    email,
+    password
+  } = req.body;
 
   // Validate that incoming data is not empty.
   if (!email || !password) {
     res.render("auth/login", {
       email,
-      errorMessage:
-        "All fields are mandatory. Please provide your email and password.",
+      errorMessage: "All fields are mandatory. Please provide your email and password.",
     });
     return;
   }
 
   // find user and send correct response
-  User.findOne({ email })
+  User.findOne({
+      email
+    })
     .then((user) => {
       // check if found user was an object or null
       if (!user) {
@@ -150,7 +182,9 @@ router.post("/login", (req, res, next) => {
 //!! User UPDATE 
 // GET route to render a single user to be edited
 router.get("/user/:id/edit", (req, res, next) => {
-const {id} = req.params;
+  const {
+    id
+  } = req.params;
 
   User.findById(id)
     .then((foundUserFromDB) =>
@@ -161,14 +195,28 @@ const {id} = req.params;
 
 // POST route to submit a specific project edits
 router.post("/user/:id", (req, res, next) => {
-  const { id } = req.params;
-  const { name, email, profession, description, skill } = req.body;
+  const {
+    id
+  } = req.params;
+  const {
+    name,
+    email,
+    profession,
+    description,
+    skill
+  } = req.body;
 
   User.findByIdAndUpdate(
-    id,
-    { name, email, profession, description, skill },
-    { new: true }
-  )
+      id, {
+        name,
+        email,
+        profession,
+        description,
+        skill
+      }, {
+        new: true
+      }
+    )
     .then(res.redirect("/user-profile"))
     .catch((error) => next(error));
 });
