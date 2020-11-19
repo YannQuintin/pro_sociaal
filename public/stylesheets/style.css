@@ -1,5 +1,7 @@
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; 
+  margin-bottom: 30px;
+}
 
 a {
   color: #00B7FF; }
@@ -13,21 +15,39 @@ a {
 }
 
 .flex {
-  display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: center;
-	align-content: center;
+    padding-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    height: 10%;
 }
 
-.card-columns {
-  @include media-breakpoint-only(lg) {
-    column-count: 4;
-  }
-  @include media-breakpoint-only(xl) {
-    column-count: 5;
-  }
+.card {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  width: 400px;
+  padding: 2rem;
+  border-radius: 25px;
+  background-color: rgb(192, 181, 181);
+  opacity: 0.7;
+  color: black;
+  font-weight: bold;
+  font-size: large;
+  align-items: center;
+}
+
+.background{
+  background-image: url("../images/projects-background.png");
+  background-position: 0 0 ;
+  background-repeat: no-repeat ;
+  background-size: cover ;
+  align-items: center;
+}
+
+.fixed-bottom{
+  margin-top: 100px;
 }
 
 /*# sourceMappingURL=style.css.map */
