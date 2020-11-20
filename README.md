@@ -1,7 +1,10 @@
 # pro_sociaal
 This is an IronHack project.
 
-npm install
+
+This is an IronHack project.
+
+npm install Downloaded packages:
 Downloaded packages:
 - connect-mongo
 - express-session
@@ -9,6 +12,7 @@ Downloaded packages:
 - multer
 - multer-storage-cloudinary
 
-Environement specific:
+- Environement specific settings: 
 .env: SESS_SECRET
+
 

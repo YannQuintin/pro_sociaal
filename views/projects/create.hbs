@@ -1,0 +1,38 @@
+<br>
+<br>
+<br>
+
+<div class="background">
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-6 col-xl-5 mx-auto">
+            <div class="card px-5 pt-4 d-flex justify-content-center">
+                <form action="/projects/create" method="POST">
+                    <div class="form-heading">
+                        <p class="text-left">Create Project</p>
+                    </div>
+                    
+                        
+                    <div class="form-group"><label class="form-control-placeholder" for="input-name">Name of the project</label><input type="text" class="form-control" name="name"></div>
+                    <div class="form-group"><label class="form-control-placeholder" for="input-skills">Skills Required</label><input type="text" class="form-control" name="skillRequired"></div>
+                    <div class="form-group"><label class="form-control-placeholder" for="input-savedMoney">Money Saved:</label><input type="number" class="form-control" name="moneySaved"></div>
+                    <div class="form-group"><label class="form-control-placeholder" for="description">Tell us more about the project!</label><textarea type="text" class="form-control" name="description"></textarea></div>  
+
+                    <div class="form-group pt-3">
+                        <div class="row">
+                            <div class="col-md-6"><button type="submit" class="btn btn-primary btn-block"><span>Create Project!</span></button></div>
+                        </div>
+                    </div>
+                    {{#if errorMessage}}
+                        <p class="error">{{errorMessage}}</p>
+                    {{/if}}
+                    {{#if validationError}}
+                        <p class="error">{{validationError}}</p>
+                    {{/if}}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
