@@ -1,50 +1,43 @@
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+ <strong>Welcome back {{ user.name }}!</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>Welcome back {{ user.name }}!</strong>
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-  </div>
-
-  <div class="container">
-    <div class="row">
-      <div class="card-deck mx-auto w-30">
-        <div class="card">
-          <img src="{{user.imageUrl}}" class="card-img-top" alt="profile-picture">
-            <div class="card-body">
-              <p><b>Name:</b>{{user.name}}</p>
-              <p><b>Email:</b> {{user.email}}</p>
-              <p><b>Profession:</b> {{user.profession}}</p>
-              <p><b>Description:</b> {{user.description}}</p>
-              <p><b>Skills:</b> {{user.skill}}</p>
-            </div>
-            <div class="card-footer">
-              <div>
-                <button>
-                  <a href="/user/{{user._id}}/edit">Edit your information</a>
-                </button>
-              </div>
-            </div>
+<div class="container">
+  <div class="row">
+    <div class="card-deck mx-auto w-30">
+      <div class="card">
+        <img src="{{user.imageUrl}}" class="card-img-top" alt="profile-picture">
+        <div class="card-body">
+          <p><b>Name:</b>{{user.name}}</p>
+          <p><b>Email:</b> {{user.email}}</p>
+          <p><b>Profession:</b> {{user.profession}}</p>
+          <p><b>Description:</b> {{user.description}}</p>
+          <p><b>Skills:</b> {{user.skill}}</p>
+        </div>
+        <div class="card-footer">
+          <div>
+            <button>
+              <a href="/user/{{user._id}}/edit">Edit your information</a>
+            </button>
+            <button>
+              <a href="/projects/create">Create a project</a>
+            </button>
+            <form id="logout-form" action="/logout" method="POST">
+              <button>Logout</button>
+            </form>
           </div>
         </div>
       </div>
     </div>
-    <div>
-      <button>
-        <a href="/projects/create">Create a project</a>
-      </button>
-    </div>
-    <div>
-      <button>
-        <a href="/user/{{user._id}}/edit">Edit your information</a>
-      </button>
-    </div>
-    <form id="logout-form" action="/logout" method="POST">
-      <button>Logout</button>
-    </form>
-
-    <div class="flex">
-      {{#each user.projects}}
-        {{>userProjectCard this}}
-      {{/each}}
-    </div>
+  </div>
+</div>
+<div>
+  <div class="flex">
+    {{#each user.projects}}
+      {{>userProjectCard this}}
+    {{/each}}
+  </div>
+</div>
