@@ -80,8 +80,9 @@ router.post("/signup", fileUploader.single('image'), (req, res, next) => {
 
   bcrypt
     .hash(password, saltRounds)
-    .then((hashedPassword) =>
-      User.create({ name, email, password: hashedPassword, profession, description , skill , imageUrl: req.file.path  })
+    .then((hashedPassword) =>{
+      const imageUrl = req.file && req.file.path ? req.file.path : "https://image.shutterstock.com/image-vector/user-login-authenticate-icon-human-260nw-1365533969.jpg"
+      User.create({ name, email, password: hashedPassword, profession, description , skill , imageUrl})
         .then((newUser) => {
           req.session.user = newUser;
           res.redirect("/user-profile");
@@ -103,7 +104,7 @@ router.post("/signup", fileUploader.single('image'), (req, res, next) => {
             next(error);
           }
         })
-    )
+      })
     .catch((err) => next(err));
 });
 

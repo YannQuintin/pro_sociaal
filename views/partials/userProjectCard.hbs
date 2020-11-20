@@ -11,8 +11,12 @@
     </div>
 
     <div class="card-footer">
-        <a href="/projects/{{this._id}}">See More Details</a>
-        <a href="/projects/{{_id}}/edit">Edit Project</a>
+        <button>
+            <a href="/projects/{{this._id}}">See More Details</a>
+        </button>
+        <button>
+            <a href="/projects/{{_id}}/edit">Edit Project</a>
+        </button>
         <form action="/projects/{{_id}}/delete" method="post">
             <button type="submit">Delete Project</button>
         </form>

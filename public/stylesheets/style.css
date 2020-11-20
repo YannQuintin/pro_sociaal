@@ -1,6 +1,7 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; 
   margin-bottom: 30px;
+  margin-top:30px;
 }
 
 a {
@@ -741,8 +742,6 @@ hr {
   @media screen and (max-width: 480px) {
     #main .content {
       padding: 1.5rem; } }
-
-
 
 .loginPage{
   display: flex;
