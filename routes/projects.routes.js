@@ -142,6 +142,19 @@ router.get("/", (req, res) => {
     );
 }); */
 
+router.get("/volunteers", (req, res) => {
+  User.find()
+    .populate("user")
+    .then((usersFromDB) => {
+      res.render("volunteers", {
+        users: usersFromDB
+      });
+    })
+    .catch((err) =>
+      console.log(`Error while getting the users from the DB: ${err}`)
+    );
+});
+
 
 
 module.exports = router;
