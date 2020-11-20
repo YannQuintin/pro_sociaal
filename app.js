@@ -32,7 +32,7 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 require("./configs/session")(app)
 
 // default value for title local
-app.locals.title = 'Pro_Sociaal';
+app.locals.title = 'Pro-Sociaal';
 
 
 hbs.registerPartials(__dirname + '/views/partials');
