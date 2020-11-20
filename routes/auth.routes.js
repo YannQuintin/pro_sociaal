@@ -1,10 +1,8 @@
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
-const {
-  Router
-} = require("express");
+const {Router} = require("express");
 const User = require("../models/User.model");
-const Project = require("../models/Project.models");
+// const Project = require("../models/Project.models");
 const fileUploader = require('../configs/cloudinary.config');
 
 const router = new Router();
@@ -94,7 +92,7 @@ router.post("/signup", fileUploader.single('image'), (req, res, next) => {
             next(error);
           }
         })
-    })
+    )
     .catch((err) => next(err));
 });
 
