@@ -1,0 +1,39 @@
+<div class="background">
+
+<div class="container">
+  <div class="row">
+    <div class="card-deck mx-auto w-30">
+      <div class="card">
+        <img src="{{user.imageUrl}}" class="card-img-top" alt="profile-picture">
+        <div class="card-body">
+          <p><b>Name:</b>{{user.name}}
+          <b>Email:</b> {{user.email}}</p>
+          <p><b>Profession:</b> {{user.profession}}
+          <b>Skills:</b> {{user.skill}}</p>
+          <p><b>Description:</b> {{user.description}}</p>
+        </div>
+        <div class="card-footer">
+          <div>
+            <button>
+              <a href="/user/{{user._id}}/edit">Edit your information</a>
+            </button>
+            <button>
+              <a href="/projects/create">Create a project</a>
+            </button>
+            <form id="logout-form" action="/logout" method="POST">
+              <button>Logout</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <div class="flex">
+    {{#each user.projects}}
+      {{>userProjectCard this}}
+    {{/each}}
+  </div>
+</div>
+</div>

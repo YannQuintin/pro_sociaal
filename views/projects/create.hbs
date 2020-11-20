@@ -1,0 +1,39 @@
+<div id="create-project">
+    <h2>Create Project</h2>
+    <form action="/projects/create" method="POST">
+
+        <label for="input-name">Name of the project</label>
+        <input type="text" id="input-name" name="name" placeholder="Your project name" />
+
+        <!-- <label for="input-description">Description</label>
+        <input type="text" name="description" id="input-description" placeholder="Tell us more about the project"/> -->
+
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Tell us more about the project!</label>
+            <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+
+        <label for="input-skill">Skills Required</label>
+        <input type="text" name="skillRequired" id="input-skill" placeholder="what skill do you need"/>
+
+        <label for="input-moneySaved">Money Saved</label>
+        <input type="number" name="moneySaved" id="input-moneySaved" placeholder="How much money to save"/>
+
+{{!-- This is needed for the image
+        <div class="form-group">
+            <label for="image-input">Image:</label>
+            <input type="file" name="image" id="image-input" class="form-control-file" />
+        </div> --}}
+
+        <button type="submit">Create project</button>
+
+        {{!-- error message will be added here --}}
+        {{#if errorMessage}}
+        <p class="error">{{errorMessage}}</p>
+        {{/if}}
+
+        {{#if validationError}}
+        <p class="error">{{validationError}}</p>
+        {{/if}}
+    </form>
+</div>

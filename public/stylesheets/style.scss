@@ -6,3 +6,18 @@ body {
 a {
   color: #00B7FF;
 }
+
+.con {
+  justify-content: center;
+	align-items: center;
+}
+
+.flex {
+  width: 200px;
+  display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+}
