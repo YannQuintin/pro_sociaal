@@ -182,11 +182,12 @@ router.get("/user/:id/edit", (req, res, next) => {
 
 router.post("/user/:id", fileUploader.single('image'),(req, res, next) => {
   const { id } = req.params;
+  const imageUrl = req.file && req.file.path ? req.file.path : "https://image.shutterstock.com/image-vector/user-login-authenticate-icon-human-260nw-1365533969.jpg"
   const { name, email, profession, description, skill, } = req.body;
 
   User.findByIdAndUpdate(
     id,
-    { name, email, profession, description, skill, imageUrl: req.file.path },
+    { name, email, profession, description, skill, imageUrl },
     { new: true }
   )
     .then(res.redirect("/user-profile"))

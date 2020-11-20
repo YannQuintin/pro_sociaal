@@ -1,18 +1,13 @@
+
 <div class="card mb-40">
     <div class="profile-card">
       <div>
+      
       <img src="{{this.imageUrl}}"  class="card-img-top" alt="default-profile">
       </div>
-      <p class="card-body"><strong> name:</strong>{{this.name}}</p>
-      <hr>
-      <p><strong>Skills & Talents:</strong>{{this.skill}}</p>
-      {{!-- {{#if this.skills}}
-      <ul>
-        {{#each skills}}
-        <li>{{this.skills}}</li>
-        {{/each}}
-      </ul>
-      {{/if}} --}}
+      <p class="card-body"><strong> Name:</strong>{{this.name}}</p>
+      <p class="card-body"><strong> Email:</strong>{{this.email}}</p>
+      <p class="card-body"><strong>Skills:</strong>{{this.skill}}</p>
     </div>
     <div class="card-footer">
     <button><a href="user/{{this._id}}">See More Details</a></button>
