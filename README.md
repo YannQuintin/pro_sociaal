@@ -5,7 +5,7 @@ This is an IronHack project.
 This is an IronHack project.
 
 npm install Downloaded packages:
-
+Downloaded packages:
 - connect-mongo
 - express-session
 - cloudinary
@@ -14,3 +14,5 @@ npm install Downloaded packages:
 
 - Environement specific settings: 
 .env: SESS_SECRET
+
+
