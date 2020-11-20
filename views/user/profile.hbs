@@ -1,24 +1,18 @@
-{{#if user}}
 
-    {{!-- <img src="{{image}}" alt=""> // This isn't link to Cloudinary yet
-    <p><b>Name:</b> {{user.name}}</p>
-    <p><b>Email:</b> {{user.email}}</p>
-    <p><b>Profession:</b> {{user.profession}}</p>
-    <p><b>Description:</b> {{user.description}}</p>
-    <p><b>Skills:</b> {{user.skill}}</p> --}}
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-          <strong>Welcome back {{ user.name }}!</strong>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-    <div class="container">
-      <div class="row">
-        <div class="card-deck mx-auto w-50">
-          <div class="card">
-            <img src="{{user.image}}" class="card-img-top" alt="profile-picture">
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Welcome back {{ user.name }}!</strong>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="card-deck mx-auto w-30">
+        <div class="card">
+          <img src="{{user.imageUrl}}" class="card-img-top" alt="profile-picture">
             <div class="card-body">
-              <h5 class="card-title">your information</h5>
+              <p><b>Name:</b>{{user.name}}</p>
               <p><b>Email:</b> {{user.email}}</p>
               <p><b>Profession:</b> {{user.profession}}</p>
               <p><b>Description:</b> {{user.description}}</p>
@@ -27,7 +21,7 @@
             <div class="card-footer">
               <div>
                 <button>
-                <a href="/user/{{user._id}}/edit">Edit your information</a>
+                  <a href="/user/{{user._id}}/edit">Edit your information</a>
                 </button>
               </div>
             </div>
@@ -35,53 +29,22 @@
         </div>
       </div>
     </div>
-  {{!-- {{#if skill}}
-  <ul>
-    {{#each skill}}
-    <li>{{user.skill}}</li>
-    {{/each}}
-  </ul>
-  {{else}}
-  <p> You are yet to add a skill! <span><a href="/user-edit">Feel free to add
-        them</a></span> </p>
-  {{/if}} --}}
-  
-  {{!-- <p><b>Projects:</b>
-  <ul>
-    {{#each user.projects}}
-    <li>{{>userProjectCard this}}</li>
-    {{/each}}
-  </ul>
-  </p> --}}
+    <div>
+      <button>
+        <a href="/projects/create">Create a project</a>
+      </button>
+    </div>
+    <div>
+      <button>
+        <a href="/user/{{user._id}}/edit">Edit your information</a>
+      </button>
+    </div>
+    <form id="logout-form" action="/logout" method="POST">
+      <button>Logout</button>
+    </form>
 
-<div class=" flex row row-cols-1 row-cols-md-2">
+    <div class="flex">
       {{#each user.projects}}
-    <li>{{>userProjectCard this}}</li>
-    {{/each}}
-</div>
-
-
-  <hr>
-</section>
-    <div>
-        <button>
-            <a href="/projects/create">Create a project</a>
-        </button>
+        {{>userProjectCard this}}
+      {{/each}}
     </div>
-    <div>
-        <button>
-            <a href="/user/{{user._id}}/edit">Edit your information</a>
-        </button>
-    </div>
-
-
-//The below means we can leave the profile page accessible for unsubscribed / logged out users.
-
-{{else}}
-    <p><a href="/login">Login</a> or <a href="/signup">Register a new account</a> to see your profile!</p>
-{{/if}}
-
-<form id="logout-form" action="/logout" method="POST">
-    <button>Logout</button>
-</form>
-
