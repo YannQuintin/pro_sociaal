@@ -12,5 +12,7 @@ npm install Downloaded packages:
 - multer
 - multer-storage-cloudinary
 
+
 - Environement specific settings: 
 .env: SESS_SECRET
+
