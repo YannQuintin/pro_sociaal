@@ -1,24 +1,34 @@
-<div class="con">
-<h1>Update User</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-6 col-xl-5 mx-auto">
+            <div class="card px-5 pt-4 d-flex justify-content-center">
+                <form action="/user/{{this._id}}" method="post" enctype="multipart/form-data" class="mydetails">
+                    <div class="form-heading">
+                        <p class="text-left">Update your Profile</p>
+                    </div>
+                    
+                        
+                    <div class="form-group"><label class="form-control-placeholder" for="input-name">Full Name</label><input type="text" class="form-control" name="name" value={{this.name}}></div>
+                    <div class="form-group"><label class="form-control-placeholder" for="input-email">Email Address</label><input type="email" class="form-control" name="email" value={{this.email}}></div>
+                   <div class="form-group"><label class="form-control-placeholder" for="input-profession">Profession:</label><input type="text" class="form-control" name="profession" value={{this.profession}} ></div>
+                    
+                    <div class="form-group"><label class="form-control-placeholder" for="description">Skills:</label><input type="text" class="form-control" name="skill" value={{this.skill}}></div>
+                    <div class="form-group"><label class="form-control-placeholder" for="description">Tell us about you:</label><textarea type="text" class="form-control" name="description" value={{this.description}}></textarea></div>
 
-<form action="/user/{{this._id}}" method="post">
-  
-  <label for="input-name">Full name</label>
-  <input type="text" name="name" value={{this.name}}>
+                    <div class="custom-file"><label for="image-input">Upload Profile Picture:</label><input type="file" name="image" id="image-input" class="form-control-file" value={{this.imageUrl}} /></div>   
 
-  <label for="input-email">Email</label>
-  <input type="text" name="email" value={{this.email}}>
+                    <div class="form-group pt-3">
+                        <div class="row">
+                            <div class="col-md-6"><button type="submit" class="btn btn-primary btn-block"><span>Update</span></button></div>
+                        </div>
+                    </div>
 
-  <label for="input-profession">Profession</label>
-  <input type="text" name="profession" value={{this.profession}}>
 
-  <label for="input-description">Description</label>
-  <input type="text" name="description" value={{this.description}}>
-
-  <label for="input-skill">Skills</label>
-  <input type="text-field" name="skill" value={{this.skill}}>
-
-  <button type="submit">Update information</button>
- 
-</form>
+                    {{#if validationError}}
+                      <p class="error">{{validationError}}</p>
+                    {{/if}}
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
