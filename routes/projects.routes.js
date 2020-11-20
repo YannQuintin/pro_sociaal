@@ -7,7 +7,7 @@ const Project = require("../models/Project.models");
 
 const router = new Router();
 
-//const router = new Router();
+// Get route to render all projects from DB
 router.get("/projects", (req, res) => {
   Project.find()
     .populate("publisher")
@@ -118,7 +118,6 @@ router.post("/projects/:id", (req, res, next) => {
     .catch((error) => next(error));
 });
 
-//!! PROJECT DELETE WIP
 //POST route to delete a specific project
 
 router.post("/projects/:id/delete", (req, res, next) => {

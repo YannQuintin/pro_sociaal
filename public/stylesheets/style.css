@@ -23,6 +23,20 @@ a {
     height: 10%;
 }
 
+.profile-card-img {
+  max-height: 40px;
+  max-width: 40px;
+    display: flex;
+}
+
+.profile-card {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+}
+
 .card {
   display: flex;
   flex-direction: column;
@@ -120,7 +134,9 @@ footer, header, hgroup, menu, nav, section {
   display: block; }
 
 body {
-  line-height: 1; }
+  line-height: 1;
+  margin-bottom: 40px;
+ }
 
 ol, ul {
   list-style: none; }

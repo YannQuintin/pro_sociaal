@@ -197,4 +197,22 @@ router.post("/logout", (req, res) => {
   res.redirect("/");
 });
 
+
+// Get route to render a specific user profile from a logged in user
+//TODO 1. add in-session user only access to this page 2. 
+
+router.get("/user/:id", (req, res, next) => {
+  const {
+    id
+  } = req.params;
+  
+  User.findById(id)
+  .then((foundUser) => {
+      console.log(foundUser);
+      res.render("user/show", foundUser);
+    })
+    .catch((error) => next(error));
+});
+
+
 module.exports = router;
