@@ -31,7 +31,7 @@ a {
   padding: 2rem;
   border-radius: 25px;
   background-color: rgb(192, 181, 181);
-  opacity: 0.7;
+  opacity: 0.8;
   color: black;
   font-weight: bold;
   font-size: large;
@@ -744,3 +744,9 @@ hr {
 
 
 
+.loginPage{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 80px
+}
