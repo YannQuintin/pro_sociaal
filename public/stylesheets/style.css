@@ -6,12 +6,12 @@ body {
 a {
   color: #00B7FF; }
 
-.carousel-inner  img{
-  height: 20%;
-}
+  .carousel {
+    height: auto;
+  }
 
-.carousel-height {
-  height: 400px ;
+.carousel-item > img {
+   opacity: 1,2;
 }
 
 .flex {
