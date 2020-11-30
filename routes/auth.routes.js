@@ -64,7 +64,7 @@ router.post("/signup", fileUploader.single('image'), (req, res, next) => {
     return;
   }
 
-  /* // Strong password pattern.
+   // Strong password pattern.
   const strongPasswordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
 
   // Validate that incoming password matches regex pattern.
@@ -76,7 +76,7 @@ router.post("/signup", fileUploader.single('image'), (req, res, next) => {
         "Password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter.",
     });
     return;
-  }*/
+  }
 
   bcrypt
     .hash(password, saltRounds)
