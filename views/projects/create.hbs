@@ -1,39 +1,38 @@
-<div id="create-project">
-    <h2>Create Project</h2>
-    <form action="/projects/create" method="POST">
+<br>
+<br>
+<br>
 
-        <label for="input-name">Name of the project</label>
-        <input type="text" id="input-name" name="name" placeholder="Your project name" />
+<div class="background">
 
-        <!-- <label for="input-description">Description</label>
-        <input type="text" name="description" id="input-description" placeholder="Tell us more about the project"/> -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-6 col-xl-5 mx-auto">
+            <div class="card px-5 pt-4 d-flex justify-content-center">
+                <form action="/projects/create" method="POST">
+                    <div class="form-heading">
+                        <p class="text-left">Create Project</p>
+                    </div>
+                    
+                        
+                    <div class="form-group"><label class="form-control-placeholder" for="input-name">Name of the project</label><input type="text" class="form-control" name="name"></div>
+                    <div class="form-group"><label class="form-control-placeholder" for="input-skills">Skills Required</label><input type="text" class="form-control" name="skillRequired"></div>
+                    <div class="form-group"><label class="form-control-placeholder" for="input-savedMoney">Money Saved:</label><input type="number" class="form-control" name="moneySaved"></div>
+                    <div class="form-group"><label class="form-control-placeholder" for="description">Tell us more about the project!</label><textarea type="text" class="form-control" name="description"></textarea></div>  
 
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Tell us more about the project!</label>
-            <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <div class="form-group pt-3">
+                        <div class="row">
+                            <div class="col-md-6"><button type="submit" class="btn btn-primary btn-block"><span>Create Project!</span></button></div>
+                        </div>
+                    </div>
+                    {{#if errorMessage}}
+                        <p class="error">{{errorMessage}}</p>
+                    {{/if}}
+                    {{#if validationError}}
+                        <p class="error">{{validationError}}</p>
+                    {{/if}}
+                </form>
+            </div>
         </div>
-
-        <label for="input-skill">Skills Required</label>
-        <input type="text" name="skillRequired" id="input-skill" placeholder="what skill do you need"/>
-
-        <label for="input-moneySaved">Money Saved</label>
-        <input type="number" name="moneySaved" id="input-moneySaved" placeholder="How much money to save"/>
-
-{{!-- This is needed for the image
-        <div class="form-group">
-            <label for="image-input">Image:</label>
-            <input type="file" name="image" id="image-input" class="form-control-file" />
-        </div> --}}
-
-        <button type="submit">Create project</button>
-
-        {{!-- error message will be added here --}}
-        {{#if errorMessage}}
-        <p class="error">{{errorMessage}}</p>
-        {{/if}}
-
-        {{#if validationError}}
-        <p class="error">{{validationError}}</p>
-        {{/if}}
-    </form>
+    </div>
+</div>
 </div>
